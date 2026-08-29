@@ -1,0 +1,1676 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Paul's Journey</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f1e8;
+            color: #222;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: auto;
+            padding: 55px 25px;
+        }
+
+        h1 {
+            font-size: 38px;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+            direction: ltr;
+        }
+
+        .subtitle {
+            font-size: 17px;
+            font-style: italic;
+            color: #666;
+            direction: ltr;
+            margin-bottom: 50px;
+        }
+
+        .step {
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            direction: ltr;
+        }
+
+        .instruction {
+            font-size: 17px;
+            line-height: 1.8;
+            margin-bottom: 35px;
+        }
+
+        .lock {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .code-title {
+            font-size: 15px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            direction: ltr;
+            margin-bottom: 15px;
+        }
+
+        input {
+            width: 150px;
+            padding: 13px;
+            font-size: 24px;
+            text-align: center;
+            letter-spacing: 8px;
+            border: 1px solid #aaa;
+            border-radius: 8px;
+            outline: none;
+            background: white;
+        }
+
+        input:focus {
+            border-color: #222;
+        }
+
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 12px 35px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            background: #222;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.85;
+        }
+
+        #message,
+        #message2,
+        #message3,
+        #message4,
+        #messageQuiz {
+            margin-top: 18px;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .mission {
+            display: none;
+            margin-top: 20px;
+            text-align: center;
+            direction: rtl;
+        }
+
+        .access-granted {
+            text-align: center;
+            direction: ltr;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: #4b7a52;
+            margin-bottom: 35px;
+        }
+
+        .mission h2 {
+            text-align: center;
+            direction: ltr;
+            font-size: 20px;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .mission h3 {
+            text-align: center;
+            direction: ltr;
+            font-size: 30px;
+            margin-top: 8px;
+            margin-bottom: 40px;
+        }
+
+        .story {
+            font-size: 18px;
+            line-height: 2;
+        }
+
+        .story p {
+            margin-bottom: 28px;
+        }
+
+        .journey-complete {
+            text-align: center;
+            direction: ltr;
+            font-size: 15px;
+            letter-spacing: 1.5px;
+            margin-top: 50px;
+            margin-bottom: 25px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 25px;
+            direction: ltr;
+        }
+
+        .buttons button {
+            margin: 0;
+        }
+
+        .next-button {
+            background: #222;
+        }
+
+        .back-button {
+            background: transparent;
+            color: #555;
+            border: 1px solid #aaa;
+        }
+
+        .back-button:hover {
+            background: #eee;
+        }
+
+        .gate-screen {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .gate-screen h2 {
+            direction: ltr;
+            font-size: 20px;
+            letter-spacing: 2px;
+        }
+
+        .gate-screen h3 {
+            direction: ltr;
+            font-size: 28px;
+            margin-top: 8px;
+            margin-bottom: 35px;
+        }
+
+        .final-message {
+            font-size: 20px;
+            line-height: 2;
+            margin-top: 30px;
+        }
+
+        .stamp-message {
+            font-size: 19px;
+            line-height: 2;
+            margin-top: 30px;
+        }
+
+        .revisit-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .revisit-buttons button {
+            margin: 0 auto;
+            min-width: 220px;
+        }
+
+        .revisit-hide {
+            display: block;
+        }
+
+        @media (max-width: 480px) {
+
+            .container {
+                padding: 35px 18px;
+            }
+
+            h1 {
+                font-size: 28px;
+                letter-spacing: 1px;
+            }
+
+            .subtitle {
+                font-size: 15px;
+                margin-bottom: 35px;
+            }
+
+            .mission h3,
+            .gate-screen h3 {
+                font-size: 22px;
+            }
+
+            .instruction,
+            .story {
+                font-size: 16px;
+            }
+
+            .final-message,
+            .stamp-message {
+                font-size: 17px;
+            }
+
+            input {
+                width: 130px;
+                font-size: 20px;
+                letter-spacing: 6px;
+            }
+
+            button {
+                padding: 12px 22px;
+                font-size: 15px;
+            }
+
+            .buttons {
+                flex-wrap: wrap;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+<!-- ================================================= -->
+<!-- MAIN / FIRST CODE SCREEN -->
+<!-- ================================================= -->
+
+<div id="start">
+
+    <h1>PAUL'S JOURNEY</h1>
+
+    <div class="subtitle">
+        Every journey has a beginning.
+    </div>
+
+    <div class="step">
+        STEP 01 — GATE 01
+    </div>
+
+    <div class="instruction">
+        توجّهوا إلى <strong>البوابة رقم 1</strong> لاستلام خريطة الرحلة واللغز الخاص بالـAccess Code.
+        <br>
+        حلّوا اللغز مع فريقكم، ثم عودوا إلى هذه الصفحة.
+    </div>
+
+    <div class="lock">
+        🔐
+    </div>
+
+    <div class="code-title">
+        ENTER ACCESS CODE
+    </div>
+
+    <input
+        type="text"
+        id="codeInput"
+        maxlength="4"
+        inputmode="numeric"
+        placeholder="____"
+    >
+
+    <button onclick="unlockMission()">
+        UNLOCK
+    </button>
+
+    <div id="message"></div>
+
+</div>
+
+
+<!-- ================================================= -->
+<!-- MISSION 1 -->
+<!-- ================================================= -->
+
+<div id="mission1" class="mission">
+
+    <div class="access-granted">
+        🔓 ACCESS GRANTED
+    </div>
+
+    <h2>MISSION 01</h2>
+    <h3>THE FIRST JOURNEY</h3>
+
+    <div class="story">
+
+        <p>
+            كل رحلة من رحلات بولس بتبدأ من هنا: <strong>أنطاكية سوريا</strong>.
+            الكنيسة هناك كانت بتصلي وبتصوم، وفجأة الروح القدس يقول:
+            "افرزوا لي برنابا وشاول." وكده الكنيسة بتبعت أول فريق إرساليات
+            في التاريخ، ومعاهم يوحنا مرقس.
+        </p>
+
+        <p>
+            ركبوا البحر من سلوكية ووصلوا لجزيرة قبرص. أول محطة كانت سلاميس،
+            وبدأوا يبشروا في مجامع اليهود الأول، زي ما كانت الخطة دايمًا:
+            "اليهود الأول وبعدين الأمم".
+        </p>
+
+        <p>
+            من سلاميس لبافوس، وهناك حصلت مواجهة غريبة مع عليم الساحر اللي
+            حاول يوقف الكرازة.. لكن النتيجة كانت عكس اللي هو متوقعها:
+            الوالي سرجيوس بولس نفسه آمن.
+        </p>
+
+        <p>
+            من قبرص ركبوا البحر تاني لبرجة في بمفيلية، وهنا حصل موقف صغير
+            هيكبر بعدين.. مرقس قرر يرجع أورشليم ومايكملش معاهم الطريق.
+            الكتاب مايقولناش السبب، لكن الموقف ده هيفضل شغال جوه بولس
+            وبرنابا لسنين جاية.
+        </p>
+
+        <p>
+            من برجة لأنطاكية بيسيدية، ودخل بولس مجمع اليهود وقدّم عظة كبيرة..
+            ناس آمنت وناس رفضت، وهنا قال تصريحه المشهور:
+            "مادام أنتوا رفضتوا كلمة الله، هنتوجه للأمم." الرد كان اضطهاد
+            شديد خلاهم يسيبوا المدينة على إيقونية.
+        </p>
+
+        <p>
+            في إيقونية نفس السيناريو اترجع، وحاول الرافضين يرجموا بولس
+            وبرنابا.. فسابوا إيقونية على لسترة.
+        </p>
+
+        <p>
+            في لسترة حصلت معجزة شفاء راجل مُقعد من يوم ميلاده. الناس اتصدمت
+            جدًا لدرجة إنهم افتكروا بولس وبرنابا آلهة نزلت من السما وحاولوا
+            يقدموا لهم ذبايح.. وبعد شوية ساعات بس، نفس الناس دي رجموا بولس
+            على باب المدينة لدرجة إنهم افتكروه مات. لكنه قام، وكمل الطريق
+            على دَربة عادي جدًا.
+        </p>
+
+        <p>
+            في دَربة استقبلوا الإنجيل بهدوء، واتلمذ منهم ناس كتير. ومن هنا
+            بدأت رحلة العودة.. رجعوا على نفس المدن يشددوا التلاميذ، وفي
+            الآخر وصلوا أنطاكية سوريا تاني عشان يدوا الكنيسة تقرير الرحلة،
+            وبولس رجع فرحان.. أول رحلة نجحت، وكنايس اتأسست، وناس آمنت.
+        </p>
+
+        <p>
+            لكن الفرحة ماكملتش. بعد كام يوم وصلته أخبار إن معلمين دخلوا
+            نفس الكنايس دي بيقولوا: "الإيمان بالمسيح وحده مش كفاية، لازم
+            ختان وشريعة موسى" - والأسوأ إنهم بدأوا يشككوا في رسولية بولس
+            نفسه. <strong>هنا بولس ماجمعش شنطته بس.. مسك القلم، وكتب رسالة
+            هتفضل عايشة لحد النهارده: رسالة بولس الرسول إلى غلاطية.</strong>
+        </p>
+
+    </div>
+
+    <div class="journey-complete">
+        <strong>THE FIRST JOURNEY IS COMPLETE.</strong>
+    </div>
+
+    <div class="buttons">
+
+        <button class="back-button" onclick="backFromMission(1)">
+            ← BACK
+        </button>
+
+        <button class="next-button stamp-action" onclick="showStamp(1)">
+            GO TO GET STAMP →
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ================================================= -->
+<!-- STAMP 1 -->
+<!-- ================================================= -->
+
+<div id="stamp1" class="gate-screen">
+
+    <div class="step">
+        JOURNEY 01 COMPLETE
+    </div>
+
+    <h2>GET YOUR STAMP</h2>
+
+    <h3>CHECKPOINT 01</h3>
+
+    <div class="stamp-message">
+
+        توجّهوا إلى <strong>البوابة رقم 1</strong>
+        ومعكم خريطة الرحلة التي أنهيتموها.
+
+        <br><br>
+
+        أروها للخادم لتحصلوا على
+        <strong>الـStamp الخاص بالرحلة الأولى</strong>
+        في الـPassport الخاص بكم.
+
+    </div>
+
+    <div class="buttons">
+
+        <button class="back-button" onclick="showMission(1)">
+            ← BACK
+        </button>
+
+        <button class="next-button" onclick="showCodeScreen(2)">
+            CONTINUE TO NEXT JOURNEY →
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ================================================= -->
+<!-- CODE SCREEN 2 -->
+<!-- ================================================= -->
+
+<div id="code2" class="gate-screen">
+
+    <div class="step">
+        STEP 02 — GATE 02
+    </div>
+
+    <h2>THE SECOND JOURNEY</h2>
+
+    <div class="instruction">
+
+        توجّهوا إلى <strong>البوابة رقم 2</strong>
+        لاستلام خريطة الرحلة الثانية واللغز الخاص بالـAccess Code.
+
+        <br><br>
+
+        حلّوا اللغز مع فريقكم، ثم عودوا إلى هنا
+        لإدخال الكود وبدء الرحلة الثانية.
+
+    </div>
+
+    <div class="lock">
+        🔐
+    </div>
+
+    <div class="code-title">
+        ENTER ACCESS CODE
+    </div>
+
+    <input
+        type="text"
+        id="codeInput2"
+        maxlength="4"
+        inputmode="numeric"
+        placeholder="____"
+    >
+
+    <button onclick="unlockMission2()">
+        UNLOCK
+    </button>
+
+    <div id="message2"></div>
+
+    <div class="buttons">
+
+        <button class="back-button" onclick="showStamp(1)">
+            ← BACK
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ================================================= -->
+<!-- MISSION 2 -->
+<!-- ================================================= -->
+
+<div id="mission2" class="mission">
+
+    <div class="access-granted">
+        🔓 ACCESS GRANTED
+    </div>
+
+    <h2>MISSION 02</h2>
+    <h3>THE SECOND JOURNEY</h3>
+
+    <div class="story">
+
+        <p>
+            الرحلة الثانية هتبدأ من نفس المكان.. أنطاكية سوريا.. بس المرة دي
+            البداية مكنتش سهلة خالص. حصل خلاف شديد بين بولس وبرنابا بسبب
+            مرقس، وفي النهاية اتفرقوا.. برنابا أخد مرقس وراح قبرص، وبولس
+            أخد سيلا وبدأ طريقه.
+        </p>
+
+        <p>
+            أول محطة كانت دَربة وبعدها لسترة.. وهناك ظهر تيموثاوس، شاب صغير
+            مشهودله من الكل بإيمانه وأخلاقه. بولس شاف فيه خادم مميز، فقرر
+            ياخده معاه في الرحلة.
+        </p>
+
+        <p>
+            مروا على مدن غلاطية وفريجية يشجعوا الكنايس اللي أسسوها في
+            الرحلة الأولى. كان نفسهم يكملوا ناحية آسيا، بس الروح القدس
+            منعهم.
+        </p>
+
+        <p>
+            وصلوا لترواس.. وهناك حصلت نقطة تحول في تاريخ الكنيسة كلها.
+            بولس شاف رؤيا بالليل: راجل من مكدونية واقف بيقوله "اعبر إلينا
+            وأعنا."
+            <strong>ولأول مرة، الإنجيل هيخرج من آسيا ويدخل أوروبا.</strong>
+        </p>
+
+        <p>
+            من ترواس ركبوا البحر لحد ما وصلوا فيلبي، أول مدينة في مكدونية.
+            هناك آمنت ليدية بائعة الأرجوان وبيتها بقى مكان تجمّع المؤمنين.
+        </p>
+
+        <p>
+            لكن المشاكل ملحقتش تستنى.. اتقبض على بولس وسيلا ودخلوا السجن.
+            في نص الليل وسط التسبيح، حصلت زلزلة فتحت أبواب السجن، وآمن
+            حافظ السجن وأهل بيته.
+        </p>
+
+        <p>
+            كرزوا في تسالونيكي وآمن ناس كتير، لكن شغب اليهود اضطرهم يسيبوها
+            بسرعة على بيرية. أهل بيرية كانوا بيفتشوا الكتب كل يوم يتأكدوا
+            من الكلام.. لكن الملاحقة وصلتهم هناك كمان.
+        </p>
+
+        <p>
+            في أثينا وقف بولس وسط أريوس باغوس وكلم الفلاسفة بلغتهم، وبدأ
+            من مذبحهم المكتوب عليه "لإله مجهول" ليعلن الإله الحقيقي.
+        </p>
+
+        <p>
+            في كورنثوس قابل أكيلا وبريسكيلا وقعد معاهم سنة ونص، أطول إقامة
+            له في الرحلة. وهناك، وقلبه لسه مشغول بكنيسة تسالونيكي اللي
+            سابها بسرعة، كتب لهم رسالتين.
+        </p>
+
+        <p>
+            مر على أفسس مرورًا سريعًا، وبعدها قيصرية، وسلّم على الكنيسة في
+            أورشليم، ورجع في النهاية لأنطاكية سوريا.
+            <strong>وبكده تكون الرحلة التبشيرية الثانية انتهت.</strong>
+        </p>
+
+    </div>
+
+    <div class="journey-complete">
+        <strong>THE SECOND JOURNEY IS COMPLETE.</strong>
+    </div>
+
+    <div class="buttons">
+
+        <button class="back-button" onclick="backFromMission(2)">
+            ← BACK
+        </button>
+
+        <button class="next-button stamp-action" onclick="showStamp(2)">
+            GO TO GET STAMP →
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ================================================= -->
+<!-- STAMP 2 -->
+<!-- ================================================= -->
+
+<div id="stamp2" class="gate-screen">
+
+    <div class="step">
+        JOURNEY 02 COMPLETE
+    </div>
+
+    <h2>GET YOUR STAMP</h2>
+
+    <h3>CHECKPOINT 02</h3>
+
+    <div class="stamp-message">
+
+        توجّهوا إلى <strong>البوابة رقم 2</strong>
+        ومعكم خريطة الرحلة التي أنهيتموها.
+
+        <br><br>
+
+        أروها للخادم لتحصلوا على
+        <strong>الـStamp الخاص بالرحلة الثانية</strong>
+        في الـPassport الخاص بكم.
+
+    </div>
+
+    <div class="buttons">
+
+        <button class="back-button" onclick="showMission(2)">
+            ← BACK
+        </button>
+
+        <button class="next-button" onclick="showCodeScreen(3)">
+            CONTINUE TO NEXT JOURNEY →
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ================================================= -->
+<!-- CODE SCREEN 3 -->
+<!-- ================================================= -->
+
+<div id="code3" class="gate-screen">
+
+    <div class="step">
+        STEP 03 — GATE 03
+    </div>
+
+    <h2>THE THIRD JOURNEY</h2>
+
+    <div class="instruction">
+
+        توجّهوا إلى <strong>البوابة رقم 3</strong>
+        لاستلام خريطة الرحلة الثالثة واللغز الخاص بالـAccess Code.
+
+        <br><br>
+
+        حلّوا اللغز مع فريقكم، ثم عودوا إلى هنا
+        لإدخال الكود وبدء الرحلة الثالثة.
+
+    </div>
+
+    <div class="lock">
+        🔐
+    </div>
+
+    <div class="code-title">
+        ENTER ACCESS CODE
+    </div>
+
+    <input
+        type="text"
+        id="codeInput3"
+        maxlength="4"
+        inputmode="numeric"
+        placeholder="____"
+    >
+
+    <button onclick="unlockMission3()">
+        UNLOCK
+    </button>
+
+    <div id="message3"></div>
+
+    <div class="buttons">
+
+        <button class="back-button" onclick="showStamp(2)">
+            ← BACK
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ================================================= -->
+<!-- MISSION 3 -->
+<!-- ================================================= -->
+
+<div id="mission3" class="mission">
+
+    <div class="access-granted">
+        🔓 ACCESS GRANTED
+    </div>
+
+    <h2>MISSION 03</h2>
+    <h3>THE THIRD JOURNEY</h3>
+
+    <div class="story">
+
+        <p>
+            الرحلة التالتة زي كل مرة هتبدأ من أنطاكية سوريا.. بس المرة دي
+            بولس مش رايح يأسس كنايس جديدة.. هو رايح يفتقد الكنايس اللي
+            أسسها قبل كده ويطمن عليها ويثبت المؤمنين فيها. المرة دي معاه
+            لوقا البشير.
+        </p>
+
+        <p>
+            عدى الأول على غلاطية وفريجية يشجع التلاميذ ويثبتهم في
+            الإيمان.. وبعدين اتحرك على أفسس.. والمدينة دي هتبقى أهم محطة
+            في الرحلة كلها.
+        </p>
+
+        <p>
+            قعد في أفسس حوالي تلات سنين.. أطول مدة قضاها في مدينة واحدة..
+            سنتين منها وهو بيعلّم كل يوم في مدرسة واحد اسمه تيرانس.. لحد
+            ما الإنجيل انتشر في كل مقاطعة آسيا.
+        </p>
+
+        <p>
+            النجاح الكبير ده كان لازم يقابله مقاومة كبيرة.. ناس كتير سابت
+            عبادة الأصنام وعبدت الإله الحي.. وده أثر على تجارة اللي
+            بيصنعوا تماثيل أرطاميس.. فحصل شغب كبير في المدينة كلها.. بس
+            في الآخر الموضوع اتلم والرسالة كملت.
+        </p>
+
+        <p>
+            وخلال وجوده في أفسس بدأت توصله أخبار مقلقة من كنيسة كورنثوس..
+            الكنيسة اللي كان بيحبها بقت فيها انقسامات ومشاكل.. فمسك القلم
+            وكتب رسالة كورنثوس الأولى.
+        </p>
+
+        <p>
+            بعدها اتحرك من أفسس لمكدونية يشجع الكنايس هناك.. وسمع إن أهل
+            كورنثوس استجابوا لكلامه.. فكتب رسالة كورنثوس الثانية يعبّر
+            فيها عن فرحه.
+        </p>
+
+        <p>
+            نزل تاني لكورنثوس وقعد فيها تلات شهور.. وهناك كتب واحدة من
+            أهم رسائله على الإطلاق.. رسالة رومية.. كان بيجهز بيها الطريق
+            قبل ما يزور كنيسة روما لأول مرة.
+        </p>
+
+        <p>
+            وهنا حصلت مؤامرة من اليهود ضده.. فبدل ما يركب السفينة على طول
+            لأنطاكية.. غيّر طريقه ورجع تاني على مكدونية ومنها لترواس.
+        </p>
+
+        <p>
+            وفي ترواس حصلت معجزة مشهورة.. الشاب أفتيخوس وقع من الدور
+            التالت وهو بيسمع وعظة طويلة لبولس.. لكن ربنا أقامه على إيده.
+        </p>
+
+        <p>
+            كمل لغاية ميليتُس.. وهناك استدعى شيوخ كنيسة أفسس وقال لهم
+            كلمات وداع مؤثرة.. لأنه كان عارف إنه مش هيشوفهم تاني.
+        </p>
+
+        <p>
+            ومن ميليتُس ركب البحر لرودُس.. باترا.. صور.. قيصرية.. وأخيرًا
+            وصل أورشليم.
+            <strong>وهنا انتهت الرحلة التبشيرية الثالثة.. لكن بدأت مرحلة
+            جديدة تمامًا في حياة بولس.</strong>
+        </p>
+
+    </div>
+
+    <div class="journey-complete">
+        <strong>THE THIRD JOURNEY IS COMPLETE.</strong>
+    </div>
+
+    <div class="buttons">
+
+        <button class="back-button" onclick="backFromMission(3)">
+            ← BACK
+        </button>
+
+        <button class="next-button stamp-action" onclick="showStamp(3)">
+            GO TO GET STAMP →
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ================================================= -->
+<!-- STAMP 3 -->
+<!-- ================================================= -->
+
+<div id="stamp3" class="gate-screen">
+
+    <div class="step">
+        JOURNEY 03 COMPLETE
+    </div>
+
+    <h2>GET YOUR STAMP</h2>
+
+    <h3>CHECKPOINT 03</h3>
+
+    <div class="stamp-message">
+
+        توجّهوا إلى <strong>البوابة رقم 3</strong>
+        ومعكم خريطة الرحلة التي أنهيتموها.
+
+        <br><br>
+
+        أروها للخادم لتحصلوا على
+        <strong>الـStamp الخاص بالرحلة الثالثة</strong>
+        في الـPassport الخاص بكم.
+
+    </div>
+
+    <div class="buttons">
+
+        <button class="back-button" onclick="showMission(3)">
+            ← BACK
+        </button>
+
+        <button class="next-button" onclick="showCodeScreen(4)">
+            CONTINUE TO NEXT JOURNEY →
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ================================================= -->
+<!-- CODE SCREEN 4 -->
+<!-- ================================================= -->
+
+<div id="code4" class="gate-screen">
+
+    <div class="step">
+        STEP 04 — GATE 04
+    </div>
+
+    <h2>THE JOURNEY TO ROME</h2>
+
+    <div class="instruction">
+
+        توجّهوا إلى <strong>البوابة رقم 4</strong>
+        لاستلام خريطة الرحلة الأخيرة واللغز الخاص بالـAccess Code.
+
+        <br><br>
+
+        حلّوا اللغز مع فريقكم، ثم عودوا إلى هنا
+        لإدخال الكود وبدء الرحلة الأخيرة.
+
+    </div>
+
+    <div class="lock">
+        🔐
+    </div>
+
+    <div class="code-title">
+        ENTER ACCESS CODE
+    </div>
+
+    <input
+        type="text"
+        id="codeInput4"
+        maxlength="4"
+        inputmode="numeric"
+        placeholder="____"
+    >
+
+    <button onclick="unlockMission4()">
+        UNLOCK
+    </button>
+
+    <div id="message4"></div>
+
+    <div class="buttons">
+
+        <button class="back-button" onclick="showStamp(3)">
+            ← BACK
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ================================================= -->
+<!-- MISSION 4 -->
+<!-- ================================================= -->
+
+<div id="mission4" class="mission">
+
+    <div class="access-granted">
+        🔓 ACCESS GRANTED
+    </div>
+
+    <h2>MISSION 04</h2>
+    <h3>THE JOURNEY TO ROME</h3>
+
+    <div class="story">
+
+        <p>
+            المرة دي الرحلة مش هتبدأ من أنطاكية سوريا زي كل مرة..
+            لأن بولس مش رايح يفتح مدن جديدة ولا يأسس كنايس جديدة.
+            هو ماشي في طريق مختلف تمامًا..
+            طريق هيوديه لروما، عاصمة الإمبراطورية..
+            مش كرسول حر، لكن كأسير للمسيح.
+        </p>
+
+        <p>
+            بعد رحلته الثالثة ووصوله لأورشليم، حصل شغب كبير واتهمه اليهود
+            باتهامات كتير.. فقبض عليه الجنود الرومان ونقلوه لقيصرية.
+            هناك قضى وقت في السجن واتحاكم قدام الوالي فيلكس وبعدين فستوس.
+        </p>
+
+        <p>
+            وبعد محاكمات طويلة قال كلمته المشهورة:
+            <strong>"إلى قيصر أنا رافع دعواي."</strong>
+            ومن هنا أصبح الطريق إلى روما مفتوحًا.
+        </p>
+
+        <p>
+            ركب بولس السفينة من قيصرية لصيداء، ومن صيداء لميرا،
+            وبعدين ركبوا مركب تانية ووصلوا للموانئ الحسنة على جزيرة كريت.
+            هنا بولس حذّرهم من خطورة استكمال الرحلة..
+            لكن رأي قبطان السفينة انتصر، واتحركوا.
+        </p>
+
+        <p>
+            وبعدها ضربت السفينة عاصفة شديدة جدًا اسمها "اليوروكليدون"..
+            استمرت أيام كتير وفضلوا تايهين في البحر 14 يوم، وفقد الكل الأمل.
+            لكن بولس وقف بينهم وطمّنهم إن ملاك الرب ظهر له،
+            وأكد له إن الله هيحفظ حياته وحياة كل اللي في السفينة.
+        </p>
+
+        <p>
+            في اليوم الـ14 اتكسرت السفينة على شاطئ جزيرة مالطة، ونجا الجميع.
+            وهناك وهو بيجمع حطب للنار، خرجت أفعى وتعلقت بإيده ولدغته..
+            أهل الجزيرة افتكروه إنسان شرير وهيموت أكيد، لكن محصلوش حاجة،
+            وقابلوهم بإحسان شديد.
+        </p>
+
+        <p>
+            بعد 3 شهور اتحركوا من مالطة على سراكوسا، وبعدين ريغيون لبوطيولي،
+            ووصل بولس أخيرًا لروما.
+        </p>
+
+        <p>
+            خلال فترة السجن الأول في روما، فضل بولس يتابع أخبار الكنايس
+            ويهتم باحتياجاتها. كتب لكنيسة أفسس عن سر الكنيسة كجسد واحد
+            للمسيح، وعن الوحدة والمحبة والحياة الجديدة فيه. وكتب لكنيسة
+            فيلبي، رسالة مليانة فرح.
+        </p>
+
+        <p>
+            وكتب لكنيسة كولوسي، معلنًا أن المسيح هو رأس الكنيسة وفوق كل
+            شيء. وفي نفس الفترة كتب رسالة شخصية جدًا لفليمون بسبب أونسيموس،
+            العبد اللي هرب وبعدين آمن.. طالبًا منه أن يقبله مش كعبد، لكن
+            كأخ محبوب في المسيح.
+        </p>
+
+        <p>
+            وبعد خروجه من السجن الأول، ظهر اهتمامه الكبير بصناعة القادة،
+            لأن الكنيسة ماينفعش تعتمد على شخص واحد.. فكتب لتيطس، وكتب
+            الرسالة الأولى لتلميذه الحبيب تيموثاوس.
+        </p>
+
+        <p>
+            هنا بدأت مرحلة جديدة.. بولس هيتقبض عليه تاني، والمرة دي كان
+            عارف إن دي هتبقى آخر مرة. ناس كتير سابوه، لكنه رغم الوحدة
+            ما فقدش الرجاء.
+        </p>
+
+        <p>
+            وفي سجنه الأخير كتب رسالته الأخيرة لتيموثاوس، وكأنه بيسلّمه
+            الأمانة قبل ما يمشي.. وقال الكلمات اللي لخصت حياته كلها:
+            <strong>"قد جاهدت الجهاد الحسن، أكملت السعي، وحفظت الإيمان."</strong>
+        </p>
+
+        <p>
+            نال بولس إكليل الشهادة في روما، لكن كلماته ما ماتتش..
+            الرسايل اللي كتبها وهو مسافر أو مسجون فضلت صوت للكنيسة عبر
+            كل الأجيال.
+        </p>
+
+    </div>
+
+    <div class="journey-complete">
+        <strong>THE JOURNEY TO ROME IS COMPLETE.</strong>
+    </div>
+
+    <div class="buttons">
+
+        <button class="back-button" onclick="backFromMission(4)">
+            ← BACK
+        </button>
+
+        <button class="next-button revisit-hide" onclick="finishJourney()">
+            COMPLETE THE JOURNEY →
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ================================================= -->
+<!-- FINAL DESTINATION -->
+<!-- ================================================= -->
+
+<div id="finalScreen" class="gate-screen">
+
+    <div class="step">
+        JOURNEY COMPLETE
+    </div>
+
+    <h2>FINAL DESTINATION</h2>
+
+    <h3>JOURNEY COMPLETED SUCCESSFULLY.</h3>
+
+    <div class="buttons">
+
+        <button class="back-button" onclick="showMission(4)">
+            ← BACK
+        </button>
+
+        <button class="next-button" onclick="showChallenge()">
+            NEXT CHALLENGE →
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ================================================= -->
+<!-- NEXT CHALLENGE -->
+<!-- ================================================= -->
+
+<div id="challengeScreen" class="gate-screen">
+
+    <div class="step">
+        NEXT CHALLENGE
+    </div>
+
+    <h2>THE JOURNEY IS OVER.</h2>
+
+    <h3>NOW, LET'S SEE WHAT YOU REMEMBER.</h3>
+
+    <div class="final-message">
+
+        توجّهوا إلى الخدام لاستلام
+        <strong>ورقة المسابقة</strong>
+        الخاصة بالرحلة.
+
+        <br><br>
+
+        طبّقوا اللي عشتوه واتعلمتوه
+        خلال الرحلات الأربعة،
+        وجاوبوا على أسئلة الورقة.
+
+        <br><br>
+
+        بعد ما تخلصوا الورقة، هتلاقوا فيها
+        <strong>كود المسابقة</strong>،
+        ادخلوه هنا عشان تكملوا رحلتكم.
+
+    </div>
+
+    <div class="buttons">
+
+        <button class="back-button" onclick="showFinalScreen()">
+            ← BACK
+        </button>
+
+        <button class="next-button" onclick="showQuizCodeScreen()">
+            ENTER QUIZ CODE →
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ================================================= -->
+<!-- QUIZ CODE SCREEN -->
+<!-- ================================================= -->
+
+<div id="quizCode" class="gate-screen">
+
+    <div class="step">
+        FINAL STEP
+    </div>
+
+    <h2>THE QUIZ</h2>
+
+    <div class="instruction">
+
+        اكتبوا <strong>كود المسابقة</strong>
+        اللي لقيتوه في نهاية ورقة الأسئلة.
+
+    </div>
+
+    <div class="lock">
+        🔐
+    </div>
+
+    <div class="code-title">
+        ENTER QUIZ CODE
+    </div>
+
+    <input
+        type="text"
+        id="codeInputQuiz"
+        maxlength="4"
+        inputmode="numeric"
+        placeholder="____"
+    >
+
+    <button onclick="unlockQuiz()">
+        UNLOCK
+    </button>
+
+    <div id="messageQuiz"></div>
+
+    <div class="buttons">
+
+        <button class="back-button" onclick="showChallenge()">
+            ← BACK
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ================================================= -->
+<!-- REVISIT JOURNEYS -->
+<!-- ================================================= -->
+
+<div id="revisitScreen" class="gate-screen">
+
+    <div class="step">
+        REVISIT THE JOURNEYS
+    </div>
+
+    <h2>LOOK BACK</h2>
+
+    <h3>CHOOSE A JOURNEY</h3>
+
+    <div class="revisit-buttons">
+
+        <button onclick="openRevisitMission(1)">
+            JOURNEY 01
+        </button>
+
+        <button onclick="openRevisitMission(2)">
+            JOURNEY 02
+        </button>
+
+        <button onclick="openRevisitMission(3)">
+            JOURNEY 03
+        </button>
+
+        <button onclick="openRevisitMission(4)">
+            JOURNEY 04
+        </button>
+
+    </div>
+
+    <div class="buttons">
+
+        <button class="back-button" onclick="showThankYou()">
+            ← BACK
+        </button>
+
+        <button class="next-button" onclick="showThankYou()">
+            DONE
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ================================================= -->
+<!-- THANK YOU SCREEN -->
+<!-- ================================================= -->
+
+<div id="thankYouScreen" class="gate-screen">
+
+    <div class="step">
+        JOURNEY COMPLETE
+    </div>
+
+    <h2>THANK YOU</h2>
+
+    <h3>WE HOPE YOU ENJOYED THE JOURNEY.</h3>
+
+    <div class="final-message">
+
+        شكرًا إنكم عشتوا الرحلة معانا.
+        <br><br>
+        نتمنى تكونوا استمتعتوا
+        بكل خطوة فيها. ❤️
+
+    </div>
+
+    <div class="buttons">
+
+        <button class="back-button" onclick="showRevisit()">
+            ← REVISIT THE JOURNEYS
+        </button>
+
+    </div>
+
+</div>
+
+
+</div>
+
+
+<script>
+
+
+/* ================================================= */
+/* REVISIT MODE */
+/* ================================================= */
+
+let revisitMode = false;
+
+
+/* ================================================= */
+/* HIDE EVERYTHING */
+/* ================================================= */
+
+function hideEverything() {
+
+    document.getElementById("start").style.display = "none";
+
+    document.getElementById("mission1").style.display = "none";
+    document.getElementById("mission2").style.display = "none";
+    document.getElementById("mission3").style.display = "none";
+    document.getElementById("mission4").style.display = "none";
+
+    document.getElementById("stamp1").style.display = "none";
+    document.getElementById("stamp2").style.display = "none";
+    document.getElementById("stamp3").style.display = "none";
+
+    document.getElementById("code2").style.display = "none";
+    document.getElementById("code3").style.display = "none";
+    document.getElementById("code4").style.display = "none";
+
+    document.getElementById("finalScreen").style.display = "none";
+    document.getElementById("challengeScreen").style.display = "none";
+    document.getElementById("quizCode").style.display = "none";
+    document.getElementById("revisitScreen").style.display = "none";
+    document.getElementById("thankYouScreen").style.display = "none";
+}
+
+
+/* ================================================= */
+/* FIRST ACCESS CODE */
+/* ================================================= */
+
+function unlockMission() {
+
+    const code = document.getElementById("codeInput").value.trim();
+
+    const message = document.getElementById("message");
+
+    hideEverything();
+
+    if (code === "8327") {
+
+        revisitMode = false;
+
+        document.getElementById("mission1").style.display = "block";
+
+    } else {
+
+        document.getElementById("start").style.display = "block";
+
+        message.innerHTML = "❌ ACCESS DENIED — Try again";
+        message.style.color = "red";
+
+    }
+
+}
+
+
+/* ================================================= */
+/* SHOW CODE SCREEN */
+/* ================================================= */
+
+function showCodeScreen(number) {
+
+    hideEverything();
+
+    revisitMode = false;
+
+    document.getElementById("code" + number).style.display = "block";
+
+}
+
+
+/* ================================================= */
+/* MISSION 2 CODE */
+/* ================================================= */
+
+function unlockMission2() {
+
+    const code = document.getElementById("codeInput2").value.trim();
+
+    const message = document.getElementById("message2");
+
+    hideEverything();
+
+    if (code === "3733") {
+
+        revisitMode = false;
+
+        document.getElementById("mission2").style.display = "block";
+
+    } else {
+
+        document.getElementById("code2").style.display = "block";
+
+        message.innerHTML = "❌ ACCESS DENIED — Try again";
+        message.style.color = "red";
+
+    }
+
+}
+
+
+/* ================================================= */
+/* MISSION 3 CODE */
+/* ================================================= */
+
+function unlockMission3() {
+
+    const code = document.getElementById("codeInput3").value.trim();
+
+    const message = document.getElementById("message3");
+
+    hideEverything();
+
+    if (code === "1057") {
+
+        revisitMode = false;
+
+        document.getElementById("mission3").style.display = "block";
+
+    } else {
+
+        document.getElementById("code3").style.display = "block";
+
+        message.innerHTML = "❌ ACCESS DENIED — Try again";
+        message.style.color = "red";
+
+    }
+
+}
+
+
+/* ================================================= */
+/* MISSION 4 CODE */
+/* ================================================= */
+
+function unlockMission4() {
+
+    const code = document.getElementById("codeInput4").value.trim();
+
+    const message = document.getElementById("message4");
+
+    hideEverything();
+
+    if (code === "2055") {
+
+        revisitMode = false;
+
+        document.getElementById("mission4").style.display = "block";
+
+    } else {
+
+        document.getElementById("code4").style.display = "block";
+
+        message.innerHTML = "❌ ACCESS DENIED — Try again";
+        message.style.color = "red";
+
+    }
+
+}
+
+
+/* ================================================= */
+/* QUIZ CODE */
+/* ================================================= */
+
+function unlockQuiz() {
+
+    const code = document.getElementById("codeInputQuiz").value.trim();
+
+    const message = document.getElementById("messageQuiz");
+
+    hideEverything();
+
+    if (code === "9999") {
+
+        revisitMode = false;
+
+        document.getElementById("thankYouScreen").style.display = "block";
+
+    } else {
+
+        document.getElementById("quizCode").style.display = "block";
+
+        message.innerHTML = "❌ ACCESS DENIED — Try again";
+        message.style.color = "red";
+
+    }
+
+}
+
+
+/* ================================================= */
+/* SHOW MISSION */
+/* ================================================= */
+
+function showMission(number) {
+
+    hideEverything();
+
+    revisitMode = false;
+
+    document.querySelectorAll(".stamp-action").forEach(function(button) {
+        button.style.display = "block";
+    });
+
+    document.getElementById("mission" + number).style.display = "block";
+
+}
+
+
+/* ================================================= */
+/* SHOW STAMP PAGE */
+/* ================================================= */
+
+function showStamp(number) {
+
+    hideEverything();
+
+    revisitMode = false;
+
+    document.getElementById("stamp" + number).style.display = "block";
+
+}
+
+
+/* ================================================= */
+/* BACK TO FIRST SCREEN */
+/* ================================================= */
+
+function goBackToStart() {
+
+    hideEverything();
+
+    revisitMode = false;
+
+    document.getElementById("start").style.display = "block";
+
+    document.getElementById("codeInput").value = "";
+    document.getElementById("message").innerHTML = "";
+
+}
+
+
+/* ================================================= */
+/* FINISH JOURNEY */
+/* ================================================= */
+
+function finishJourney() {
+
+    hideEverything();
+
+    revisitMode = false;
+
+    document.getElementById("finalScreen").style.display = "block";
+
+}
+
+
+/* ================================================= */
+/* FINAL SCREEN */
+/* ================================================= */
+
+function showFinalScreen() {
+
+    hideEverything();
+
+    revisitMode = false;
+
+    document.getElementById("finalScreen").style.display = "block";
+
+}
+
+
+/* ================================================= */
+/* NEXT CHALLENGE */
+/* ================================================= */
+
+function showChallenge() {
+
+    hideEverything();
+
+    revisitMode = false;
+
+    document.getElementById("challengeScreen").style.display = "block";
+
+}
+
+
+/* ================================================= */
+/* QUIZ CODE SCREEN */
+/* ================================================= */
+
+function showQuizCodeScreen() {
+
+    hideEverything();
+
+    revisitMode = false;
+
+    document.getElementById("quizCode").style.display = "block";
+
+}
+
+
+/* ================================================= */
+/* REVISIT JOURNEYS */
+/* ================================================= */
+
+function showRevisit() {
+
+    hideEverything();
+
+    revisitMode = true;
+
+    document.getElementById("revisitScreen").style.display = "block";
+
+}
+
+
+/* ================================================= */
+/* THANK YOU SCREEN */
+/* ================================================= */
+
+function showThankYou() {
+
+    hideEverything();
+
+    revisitMode = true;
+
+    document.getElementById("thankYouScreen").style.display = "block";
+
+}
+
+
+/* ================================================= */
+/* OPEN JOURNEY FROM REVISIT */
+/* ================================================= */
+
+function openRevisitMission(number) {
+
+    hideEverything();
+
+    revisitMode = true;
+
+    document.querySelectorAll(".stamp-action").forEach(function(button) {
+        button.style.display = "none";
+    });
+
+    document.querySelectorAll(".revisit-hide").forEach(function(button) {
+        button.style.display = "none";
+    });
+
+    document.getElementById("mission" + number).style.display = "block";
+
+}
+
+
+/* ================================================= */
+/* OVERRIDE MISSION BACK BEHAVIOR */
+/* ================================================= */
+
+function backFromMission(number) {
+
+    if (revisitMode) {
+
+        showRevisit();
+
+    } else {
+
+        if (number === 1) {
+
+            goBackToStart();
+
+        } else {
+
+            showCodeScreen(number);
+
+        }
+
+    }
+
+}
+
+
+/* ================================================= */
+/* INITIAL STATE */
+/* ================================================= */
+
+hideEverything();
+
+document.getElementById("start").style.display = "block";
+
+
+</script>
+
+</body>
+</html>
