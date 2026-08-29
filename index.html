@@ -5,227 +5,472 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#efe6d0">
+    <meta name="description" content="رحلات بولس الرسول التبشيرية الأربعة — لعبة تفاعلية">
 
     <title>Paul's Journey</title>
 
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📜</text></svg>">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
     <style>
+
+        :root {
+            --bg: #efe6d0;
+            --card: #fffaf3;
+            --ink: #2b241d;
+            --ink-soft: #7a6f5e;
+            --line: #e2d5b8;
+            --gold: #b8862e;
+            --gold-dark: #96691f;
+            --gold-light: #e8c98a;
+            --navy: #24405f;
+            --success: #4b7a52;
+            --success-bg: #e8f1e9;
+            --error: #b3392c;
+            --error-bg: #fbe9e6;
+            --radius: 20px;
+            --shadow: 0 12px 34px rgba(43, 36, 29, .14);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
 
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f5f1e8;
-            color: #222;
+            font-family: 'Cairo', Arial, sans-serif;
+            background-color: var(--bg);
+            background-image: radial-gradient(circle at 1px 1px, rgba(36, 64, 95, .08) 1px, transparent 0);
+            background-size: 22px 22px;
+            color: var(--ink);
             text-align: center;
+            min-height: 100vh;
+            padding: 24px 14px;
         }
 
         .container {
+            position: relative;
             max-width: 650px;
             margin: auto;
-            padding: 55px 25px;
+            padding: 48px 30px 40px;
+            background: var(--card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--gold-dark), var(--gold-light), var(--gold-dark));
         }
 
         h1 {
-            font-size: 38px;
-            letter-spacing: 2px;
+            font-family: 'Cinzel', serif;
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: 3px;
             margin-bottom: 8px;
             direction: ltr;
+            color: var(--navy);
         }
 
         .subtitle {
-            font-size: 17px;
+            font-size: 16px;
             font-style: italic;
-            color: #666;
+            color: var(--ink-soft);
             direction: ltr;
-            margin-bottom: 50px;
+            margin-bottom: 34px;
+        }
+
+        /* ---------- STEPPER ---------- */
+
+        .stepper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            direction: ltr;
+            margin-bottom: 38px;
+        }
+
+        .step-dot {
+            flex: 0 0 auto;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cinzel', serif;
+            font-size: 13px;
+            font-weight: 700;
+            border: 2px solid var(--line);
+            color: var(--ink-soft);
+            background: var(--card);
+            transition: all .3s ease;
+        }
+
+        .step-dot.active {
+            border-color: var(--gold);
+            color: var(--gold-dark);
+            box-shadow: 0 0 0 4px rgba(184, 134, 46, .16);
+        }
+
+        .step-dot.done {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: #fff;
+        }
+
+        .step-line {
+            flex: 1 1 auto;
+            height: 2px;
+            background: var(--line);
+            margin: 0 4px;
+            max-width: 34px;
+            transition: background .3s ease;
+        }
+
+        .step-line.done {
+            background: var(--gold);
         }
 
         .step {
-            font-size: 14px;
-            font-weight: bold;
-            letter-spacing: 1px;
+            font-family: 'Cinzel', serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
             margin-bottom: 15px;
             direction: ltr;
+            color: var(--navy);
         }
 
         .instruction {
             font-size: 17px;
-            line-height: 1.8;
-            margin-bottom: 35px;
+            line-height: 1.9;
+            margin-bottom: 32px;
+            color: var(--ink);
         }
 
         .lock {
-            font-size: 28px;
-            margin-bottom: 10px;
+            font-size: 30px;
+            margin-bottom: 12px;
         }
 
         .code-title {
-            font-size: 15px;
-            font-weight: bold;
-            letter-spacing: 1px;
+            font-family: 'Cinzel', serif;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
             direction: ltr;
-            margin-bottom: 15px;
+            margin-bottom: 18px;
+            color: var(--navy);
         }
 
-        input {
-            width: 150px;
-            padding: 13px;
-            font-size: 24px;
+        /* ---------- OTP CODE BOXES ---------- */
+
+        .otp-group {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            direction: ltr;
+            margin: 0 auto;
+        }
+
+        .otp-box {
+            width: 54px;
+            height: 62px;
+            padding: 0;
+            font-family: 'Cinzel', serif;
+            font-size: 26px;
+            font-weight: 700;
             text-align: center;
-            letter-spacing: 8px;
-            border: 1px solid #aaa;
-            border-radius: 8px;
+            border: 2px solid var(--line);
+            border-radius: 12px;
             outline: none;
-            background: white;
+            background: #fff;
+            color: var(--ink);
+            transition: border-color .2s, box-shadow .2s, transform .1s;
         }
 
-        input:focus {
-            border-color: #222;
+        .otp-box:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 4px rgba(184, 134, 46, .16);
+        }
+
+        @keyframes shake {
+            10%, 90% { transform: translateX(-2px); }
+            20%, 80% { transform: translateX(4px); }
+            30%, 50%, 70% { transform: translateX(-7px); }
+            40%, 60% { transform: translateX(7px); }
+        }
+
+        .otp-group.shake .otp-box {
+            animation: shake .5s;
+            border-color: var(--error);
         }
 
         button {
             display: block;
-            margin: 20px auto;
-            padding: 12px 35px;
-            font-size: 16px;
-            font-weight: bold;
+            margin: 22px auto 0;
+            padding: 13px 34px;
+            font-family: 'Cinzel', serif;
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: .5px;
             border: none;
-            border-radius: 8px;
-            background: #222;
-            color: white;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--gold-light), var(--gold-dark));
+            color: #fff;
             cursor: pointer;
+            box-shadow: 0 6px 16px rgba(150, 105, 31, .28);
+            transition: transform .15s ease, box-shadow .15s ease;
         }
 
         button:hover {
-            opacity: 0.85;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(150, 105, 31, .35);
         }
 
-        #message,
-        #message2,
-        #message3,
-        #message4,
-        #messageQuiz {
-            margin-top: 18px;
-            font-weight: bold;
-            font-size: 15px;
+        button:active {
+            transform: translateY(0);
+        }
+
+        .feedback {
+            margin-top: 16px;
+            font-weight: 700;
+            font-size: 14px;
+            min-height: 20px;
+        }
+
+        .feedback.error {
+            color: var(--error);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .mission {
             display: none;
-            margin-top: 20px;
+            margin-top: 6px;
             text-align: center;
             direction: rtl;
+            animation: fadeIn .4s ease;
         }
 
         .access-granted {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin: 0 auto 30px;
+            padding: 8px 18px;
+            border-radius: 999px;
+            background: var(--success-bg);
             text-align: center;
             direction: ltr;
-            font-size: 14px;
-            font-weight: bold;
-            letter-spacing: 2px;
-            color: #4b7a52;
-            margin-bottom: 35px;
+            font-family: 'Cinzel', serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: var(--success);
         }
 
         .mission h2 {
+            font-family: 'Cinzel', serif;
             text-align: center;
             direction: ltr;
-            font-size: 20px;
+            font-size: 18px;
             letter-spacing: 2px;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
+            color: var(--ink-soft);
         }
 
         .mission h3 {
+            font-family: 'Cinzel', serif;
             text-align: center;
             direction: ltr;
-            font-size: 30px;
+            font-size: 28px;
+            font-weight: 700;
             margin-top: 8px;
-            margin-bottom: 40px;
+            margin-bottom: 18px;
+            color: var(--navy);
+        }
+
+        .ornament {
+            width: 90px;
+            height: 14px;
+            margin: 0 auto 34px;
+            position: relative;
+        }
+
+        .ornament::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--gold);
+            opacity: .55;
+        }
+
+        .ornament::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 8px;
+            height: 8px;
+            background: var(--gold);
+            transform: translate(-50%, -50%) rotate(45deg);
         }
 
         .story {
-            font-size: 18px;
+            font-size: 17.5px;
             line-height: 2;
+            text-align: justify;
         }
 
         .story p {
-            margin-bottom: 28px;
+            margin-bottom: 26px;
         }
 
         .journey-complete {
             text-align: center;
             direction: ltr;
-            font-size: 15px;
+            font-family: 'Cinzel', serif;
+            font-size: 14px;
             letter-spacing: 1.5px;
-            margin-top: 50px;
-            margin-bottom: 25px;
+            margin-top: 46px;
+            margin-bottom: 20px;
+            color: var(--gold-dark);
         }
 
         .buttons {
             display: flex;
             justify-content: center;
             gap: 10px;
-            margin-top: 25px;
+            margin-top: 24px;
             direction: ltr;
+            flex-wrap: wrap;
         }
 
         .buttons button {
             margin: 0;
         }
 
-        .next-button {
-            background: #222;
-        }
-
         .back-button {
             background: transparent;
-            color: #555;
-            border: 1px solid #aaa;
+            color: var(--navy);
+            border: 1.5px solid var(--line);
+            box-shadow: none;
         }
 
         .back-button:hover {
-            background: #eee;
+            background: rgba(36, 64, 95, .06);
+            transform: none;
+            box-shadow: none;
         }
 
         .gate-screen {
             display: none;
-            margin-top: 20px;
+            margin-top: 6px;
+            animation: fadeIn .4s ease;
         }
 
         .gate-screen h2 {
+            font-family: 'Cinzel', serif;
             direction: ltr;
-            font-size: 20px;
+            font-size: 18px;
             letter-spacing: 2px;
+            color: var(--ink-soft);
         }
 
         .gate-screen h3 {
+            font-family: 'Cinzel', serif;
             direction: ltr;
-            font-size: 28px;
+            font-size: 26px;
+            font-weight: 700;
             margin-top: 8px;
-            margin-bottom: 35px;
+            margin-bottom: 32px;
+            color: var(--navy);
         }
 
         .final-message {
-            font-size: 20px;
+            font-size: 19px;
             line-height: 2;
-            margin-top: 30px;
+            margin-top: 28px;
         }
 
         .stamp-message {
-            font-size: 19px;
+            font-size: 18px;
             line-height: 2;
-            margin-top: 30px;
+            margin-top: 12px;
+        }
+
+        /* ---------- PASSPORT STAMP BADGE ---------- */
+
+        .stamp-badge {
+            width: 116px;
+            height: 116px;
+            margin: 6px auto 22px;
+            border-radius: 50%;
+            border: 3px dashed var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: rotate(-7deg);
+        }
+
+        .stamp-badge-inner {
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            color: var(--gold-dark);
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .stamp-badge-inner .n {
+            display: block;
+            font-size: 26px;
+        }
+
+        .stamp-badge-inner .t {
+            display: block;
+            font-size: 10px;
+            letter-spacing: 1.5px;
         }
 
         .revisit-buttons {
             display: flex;
             flex-direction: column;
             gap: 12px;
-            margin-top: 30px;
+            margin-top: 26px;
         }
 
         .revisit-buttons button {
             margin: 0 auto;
             min-width: 220px;
+            width: 100%;
+        }
+
+        @media (min-width: 420px) {
+
+            .revisit-buttons {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+            }
+
         }
 
         .revisit-hide {
@@ -234,48 +479,72 @@
 
         @media (max-width: 480px) {
 
+            body {
+                padding: 14px 8px;
+            }
+
             .container {
-                padding: 35px 18px;
+                padding: 32px 18px 30px;
+                border-radius: 16px;
             }
 
             h1 {
-                font-size: 28px;
-                letter-spacing: 1px;
+                font-size: 25px;
+                letter-spacing: 1.5px;
             }
 
             .subtitle {
-                font-size: 15px;
-                margin-bottom: 35px;
+                font-size: 14px;
+                margin-bottom: 26px;
+            }
+
+            .stepper {
+                margin-bottom: 28px;
+            }
+
+            .step-dot {
+                width: 26px;
+                height: 26px;
+                font-size: 11px;
+            }
+
+            .step-line {
+                max-width: 18px;
             }
 
             .mission h3,
             .gate-screen h3 {
-                font-size: 22px;
+                font-size: 21px;
             }
 
             .instruction,
             .story {
-                font-size: 16px;
+                font-size: 15.5px;
             }
 
             .final-message,
             .stamp-message {
-                font-size: 17px;
+                font-size: 16px;
             }
 
-            input {
-                width: 130px;
-                font-size: 20px;
-                letter-spacing: 6px;
+            .otp-box {
+                width: 44px;
+                height: 54px;
+                font-size: 21px;
+            }
+
+            .otp-group {
+                gap: 8px;
             }
 
             button {
-                padding: 12px 22px;
-                font-size: 15px;
+                padding: 12px 20px;
+                font-size: 14px;
             }
 
-            .buttons {
-                flex-wrap: wrap;
+            .stamp-badge {
+                width: 96px;
+                height: 96px;
             }
 
         }
@@ -288,6 +557,23 @@
 <body>
 
 <div class="container">
+
+
+<!-- ================================================= -->
+<!-- PROGRESS STEPPER -->
+<!-- ================================================= -->
+
+<div class="stepper" id="stepper">
+    <div class="step-dot" data-step="1">1</div>
+    <div class="step-line" data-line="1"></div>
+    <div class="step-dot" data-step="2">2</div>
+    <div class="step-line" data-line="2"></div>
+    <div class="step-dot" data-step="3">3</div>
+    <div class="step-line" data-line="3"></div>
+    <div class="step-dot" data-step="4">4</div>
+    <div class="step-line" data-line="4"></div>
+    <div class="step-dot" data-step="5">✓</div>
+</div>
 
 
 <!-- ================================================= -->
@@ -320,19 +606,18 @@
         ENTER ACCESS CODE
     </div>
 
-    <input
-        type="text"
-        id="codeInput"
-        maxlength="4"
-        inputmode="numeric"
-        placeholder="____"
-    >
+    <div class="otp-group" id="otpGroup1">
+        <input type="text" class="otp-box" maxlength="1" inputmode="numeric" autofocus>
+        <input type="text" class="otp-box" maxlength="1" inputmode="numeric">
+        <input type="text" class="otp-box" maxlength="1" inputmode="numeric">
+        <input type="text" class="otp-box" maxlength="1" inputmode="numeric">
+    </div>
 
     <button onclick="unlockMission()">
         UNLOCK
     </button>
 
-    <div id="message"></div>
+    <div class="feedback" id="message"></div>
 
 </div>
 
@@ -349,6 +634,7 @@
 
     <h2>MISSION 01</h2>
     <h3>THE FIRST JOURNEY</h3>
+    <div class="ornament"></div>
 
     <div class="story">
 
@@ -448,6 +734,13 @@
 
     <h3>CHECKPOINT 01</h3>
 
+    <div class="stamp-badge">
+        <div class="stamp-badge-inner">
+            <span class="n">01</span>
+            <span class="t">STAMPED</span>
+        </div>
+    </div>
+
     <div class="stamp-message">
 
         توجّهوا إلى <strong>البوابة رقم 1</strong>
@@ -508,19 +801,18 @@
         ENTER ACCESS CODE
     </div>
 
-    <input
-        type="text"
-        id="codeInput2"
-        maxlength="4"
-        inputmode="numeric"
-        placeholder="____"
-    >
+    <div class="otp-group" id="otpGroup2">
+        <input type="text" class="otp-box" maxlength="1" inputmode="numeric">
+        <input type="text" class="otp-box" maxlength="1" inputmode="numeric">
+        <input type="text" class="otp-box" maxlength="1" inputmode="numeric">
+        <input type="text" class="otp-box" maxlength="1" inputmode="numeric">
+    </div>
 
     <button onclick="unlockMission2()">
         UNLOCK
     </button>
 
-    <div id="message2"></div>
+    <div class="feedback" id="message2"></div>
 
     <div class="buttons">
 
@@ -545,6 +837,7 @@
 
     <h2>MISSION 02</h2>
     <h3>THE SECOND JOURNEY</h3>
+    <div class="ornament"></div>
 
     <div class="story">
 
@@ -643,6 +936,13 @@
 
     <h3>CHECKPOINT 02</h3>
 
+    <div class="stamp-badge">
+        <div class="stamp-badge-inner">
+            <span class="n">02</span>
+            <span class="t">STAMPED</span>
+        </div>
+    </div>
+
     <div class="stamp-message">
 
         توجّهوا إلى <strong>البوابة رقم 2</strong>
@@ -703,19 +1003,18 @@
         ENTER ACCESS CODE
     </div>
 
-    <input
-        type="text"
-        id="codeInput3"
-        maxlength="4"
-        inputmode="numeric"
-        placeholder="____"
-    >
+    <div class="otp-group" id="otpGroup3">
+        <input type="text" class="otp-box" maxlength="1" inputmode="numeric">
+        <input type="text" class="otp-box" maxlength="1" inputmode="numeric">
+        <input type="text" class="otp-box" maxlength="1" inputmode="numeric">
+        <input type="text" class="otp-box" maxlength="1" inputmode="numeric">
+    </div>
 
     <button onclick="unlockMission3()">
         UNLOCK
     </button>
 
-    <div id="message3"></div>
+    <div class="feedback" id="message3"></div>
 
     <div class="buttons">
 
@@ -740,6 +1039,7 @@
 
     <h2>MISSION 03</h2>
     <h3>THE THIRD JOURNEY</h3>
+    <div class="ornament"></div>
 
     <div class="story">
 
@@ -844,6 +1144,13 @@
 
     <h3>CHECKPOINT 03</h3>
 
+    <div class="stamp-badge">
+        <div class="stamp-badge-inner">
+            <span class="n">03</span>
+            <span class="t">STAMPED</span>
+        </div>
+    </div>
+
     <div class="stamp-message">
 
         توجّهوا إلى <strong>البوابة رقم 3</strong>
@@ -904,19 +1211,18 @@
         ENTER ACCESS CODE
     </div>
 
-    <input
-        type="text"
-        id="codeInput4"
-        maxlength="4"
-        inputmode="numeric"
-        placeholder="____"
-    >
+    <div class="otp-group" id="otpGroup4">
+        <input type="text" class="otp-box" maxlength="1" inputmode="numeric">
+        <input type="text" class="otp-box" maxlength="1" inputmode="numeric">
+        <input type="text" class="otp-box" maxlength="1" inputmode="numeric">
+        <input type="text" class="otp-box" maxlength="1" inputmode="numeric">
+    </div>
 
     <button onclick="unlockMission4()">
         UNLOCK
     </button>
 
-    <div id="message4"></div>
+    <div class="feedback" id="message4"></div>
 
     <div class="buttons">
 
@@ -941,6 +1247,7 @@
 
     <h2>MISSION 04</h2>
     <h3>THE JOURNEY TO ROME</h3>
+    <div class="ornament"></div>
 
     <div class="story">
 
@@ -1154,19 +1461,18 @@
         ENTER QUIZ CODE
     </div>
 
-    <input
-        type="text"
-        id="codeInputQuiz"
-        maxlength="4"
-        inputmode="numeric"
-        placeholder="____"
-    >
+    <div class="otp-group" id="otpGroupQuiz">
+        <input type="text" class="otp-box" maxlength="1" inputmode="numeric">
+        <input type="text" class="otp-box" maxlength="1" inputmode="numeric">
+        <input type="text" class="otp-box" maxlength="1" inputmode="numeric">
+        <input type="text" class="otp-box" maxlength="1" inputmode="numeric">
+    </div>
 
     <button onclick="unlockQuiz()">
         UNLOCK
     </button>
 
-    <div id="messageQuiz"></div>
+    <div class="feedback" id="messageQuiz"></div>
 
     <div class="buttons">
 
@@ -1276,6 +1582,129 @@ let revisitMode = false;
 
 
 /* ================================================= */
+/* PROGRESS STEPPER */
+/* ================================================= */
+
+function setStep(n) {
+
+    const complete = n >= 5;
+
+    document.querySelectorAll(".step-dot").forEach(function(dot) {
+
+        const step = parseInt(dot.dataset.step, 10);
+
+        dot.classList.remove("done", "active");
+
+        if (complete || step < n) {
+            dot.classList.add("done");
+        } else if (step === n) {
+            dot.classList.add("active");
+        }
+
+    });
+
+    document.querySelectorAll(".step-line").forEach(function(line) {
+
+        const index = parseInt(line.dataset.line, 10);
+
+        line.classList.toggle("done", complete || index < n);
+
+    });
+
+}
+
+
+/* ================================================= */
+/* OTP CODE BOXES */
+/* ================================================= */
+
+function wireOtpGroup(id, onComplete) {
+
+    const boxes = Array.from(document.querySelectorAll("#" + id + " .otp-box"));
+
+    boxes.forEach(function(box, i) {
+
+        box.addEventListener("input", function() {
+
+            box.value = box.value.replace(/[^0-9]/g, "").slice(0, 1);
+
+            if (box.value && i < boxes.length - 1) {
+                boxes[i + 1].focus();
+            }
+
+            if (boxes.every(function(b) { return b.value.length === 1; })) {
+                setTimeout(onComplete, 150);
+            }
+
+        });
+
+        box.addEventListener("keydown", function(e) {
+
+            if (e.key === "Backspace" && !box.value && i > 0) {
+                boxes[i - 1].focus();
+            }
+
+        });
+
+        box.addEventListener("paste", function(e) {
+
+            e.preventDefault();
+
+            const text = (e.clipboardData || window.clipboardData)
+                .getData("text")
+                .replace(/[^0-9]/g, "")
+                .slice(0, boxes.length);
+
+            text.split("").forEach(function(ch, idx) {
+                if (boxes[idx]) boxes[idx].value = ch;
+            });
+
+            const last = Math.min(text.length, boxes.length) - 1;
+
+            if (last >= 0) boxes[last].focus();
+
+            if (boxes.every(function(b) { return b.value.length === 1; })) {
+                setTimeout(onComplete, 150);
+            }
+
+        });
+
+    });
+
+}
+
+function getOtpValue(id) {
+
+    return Array.from(document.querySelectorAll("#" + id + " .otp-box"))
+        .map(function(b) { return b.value; })
+        .join("");
+
+}
+
+function clearOtpGroup(id) {
+
+    const boxes = document.querySelectorAll("#" + id + " .otp-box");
+
+    boxes.forEach(function(b) { b.value = ""; });
+
+    if (boxes[0]) boxes[0].focus();
+
+}
+
+function shakeOtpGroup(id) {
+
+    const group = document.getElementById(id);
+
+    group.classList.remove("shake");
+
+    void group.offsetWidth;
+
+    group.classList.add("shake");
+
+}
+
+
+/* ================================================= */
 /* HIDE EVERYTHING */
 /* ================================================= */
 
@@ -1310,9 +1739,11 @@ function hideEverything() {
 
 function unlockMission() {
 
-    const code = document.getElementById("codeInput").value.trim();
+    const code = getOtpValue("otpGroup1");
 
     const message = document.getElementById("message");
+
+    if (code.length < 4) return;
 
     hideEverything();
 
@@ -1320,14 +1751,24 @@ function unlockMission() {
 
         revisitMode = false;
 
+        setStep(1);
+
+        message.innerHTML = "";
+        message.classList.remove("error");
+
         document.getElementById("mission1").style.display = "block";
 
     } else {
 
         document.getElementById("start").style.display = "block";
 
-        message.innerHTML = "❌ ACCESS DENIED — Try again";
-        message.style.color = "red";
+        setStep(1);
+
+        message.innerHTML = "❌ الكود مش صح، جرّبوا تاني";
+        message.classList.add("error");
+
+        shakeOtpGroup("otpGroup1");
+        clearOtpGroup("otpGroup1");
 
     }
 
@@ -1344,6 +1785,8 @@ function showCodeScreen(number) {
 
     revisitMode = false;
 
+    setStep(number);
+
     document.getElementById("code" + number).style.display = "block";
 
 }
@@ -1355,9 +1798,11 @@ function showCodeScreen(number) {
 
 function unlockMission2() {
 
-    const code = document.getElementById("codeInput2").value.trim();
+    const code = getOtpValue("otpGroup2");
 
     const message = document.getElementById("message2");
+
+    if (code.length < 4) return;
 
     hideEverything();
 
@@ -1365,14 +1810,24 @@ function unlockMission2() {
 
         revisitMode = false;
 
+        setStep(2);
+
+        message.innerHTML = "";
+        message.classList.remove("error");
+
         document.getElementById("mission2").style.display = "block";
 
     } else {
 
         document.getElementById("code2").style.display = "block";
 
-        message.innerHTML = "❌ ACCESS DENIED — Try again";
-        message.style.color = "red";
+        setStep(2);
+
+        message.innerHTML = "❌ الكود مش صح، جرّبوا تاني";
+        message.classList.add("error");
+
+        shakeOtpGroup("otpGroup2");
+        clearOtpGroup("otpGroup2");
 
     }
 
@@ -1385,9 +1840,11 @@ function unlockMission2() {
 
 function unlockMission3() {
 
-    const code = document.getElementById("codeInput3").value.trim();
+    const code = getOtpValue("otpGroup3");
 
     const message = document.getElementById("message3");
+
+    if (code.length < 4) return;
 
     hideEverything();
 
@@ -1395,14 +1852,24 @@ function unlockMission3() {
 
         revisitMode = false;
 
+        setStep(3);
+
+        message.innerHTML = "";
+        message.classList.remove("error");
+
         document.getElementById("mission3").style.display = "block";
 
     } else {
 
         document.getElementById("code3").style.display = "block";
 
-        message.innerHTML = "❌ ACCESS DENIED — Try again";
-        message.style.color = "red";
+        setStep(3);
+
+        message.innerHTML = "❌ الكود مش صح، جرّبوا تاني";
+        message.classList.add("error");
+
+        shakeOtpGroup("otpGroup3");
+        clearOtpGroup("otpGroup3");
 
     }
 
@@ -1415,9 +1882,11 @@ function unlockMission3() {
 
 function unlockMission4() {
 
-    const code = document.getElementById("codeInput4").value.trim();
+    const code = getOtpValue("otpGroup4");
 
     const message = document.getElementById("message4");
+
+    if (code.length < 4) return;
 
     hideEverything();
 
@@ -1425,14 +1894,24 @@ function unlockMission4() {
 
         revisitMode = false;
 
+        setStep(4);
+
+        message.innerHTML = "";
+        message.classList.remove("error");
+
         document.getElementById("mission4").style.display = "block";
 
     } else {
 
         document.getElementById("code4").style.display = "block";
 
-        message.innerHTML = "❌ ACCESS DENIED — Try again";
-        message.style.color = "red";
+        setStep(4);
+
+        message.innerHTML = "❌ الكود مش صح، جرّبوا تاني";
+        message.classList.add("error");
+
+        shakeOtpGroup("otpGroup4");
+        clearOtpGroup("otpGroup4");
 
     }
 
@@ -1445,9 +1924,11 @@ function unlockMission4() {
 
 function unlockQuiz() {
 
-    const code = document.getElementById("codeInputQuiz").value.trim();
+    const code = getOtpValue("otpGroupQuiz");
 
     const message = document.getElementById("messageQuiz");
+
+    if (code.length < 4) return;
 
     hideEverything();
 
@@ -1455,14 +1936,24 @@ function unlockQuiz() {
 
         revisitMode = false;
 
+        setStep(5);
+
+        message.innerHTML = "";
+        message.classList.remove("error");
+
         document.getElementById("thankYouScreen").style.display = "block";
 
     } else {
 
         document.getElementById("quizCode").style.display = "block";
 
-        message.innerHTML = "❌ ACCESS DENIED — Try again";
-        message.style.color = "red";
+        setStep(5);
+
+        message.innerHTML = "❌ الكود مش صح، جرّبوا تاني";
+        message.classList.add("error");
+
+        shakeOtpGroup("otpGroupQuiz");
+        clearOtpGroup("otpGroupQuiz");
 
     }
 
@@ -1478,6 +1969,8 @@ function showMission(number) {
     hideEverything();
 
     revisitMode = false;
+
+    setStep(number);
 
     document.querySelectorAll(".stamp-action").forEach(function(button) {
         button.style.display = "block";
@@ -1498,6 +1991,8 @@ function showStamp(number) {
 
     revisitMode = false;
 
+    setStep(number);
+
     document.getElementById("stamp" + number).style.display = "block";
 
 }
@@ -1513,10 +2008,15 @@ function goBackToStart() {
 
     revisitMode = false;
 
+    setStep(1);
+
     document.getElementById("start").style.display = "block";
 
-    document.getElementById("codeInput").value = "";
-    document.getElementById("message").innerHTML = "";
+    clearOtpGroup("otpGroup1");
+
+    const message = document.getElementById("message");
+    message.innerHTML = "";
+    message.classList.remove("error");
 
 }
 
@@ -1530,6 +2030,8 @@ function finishJourney() {
     hideEverything();
 
     revisitMode = false;
+
+    setStep(4);
 
     document.getElementById("finalScreen").style.display = "block";
 
@@ -1546,6 +2048,8 @@ function showFinalScreen() {
 
     revisitMode = false;
 
+    setStep(4);
+
     document.getElementById("finalScreen").style.display = "block";
 
 }
@@ -1560,6 +2064,8 @@ function showChallenge() {
     hideEverything();
 
     revisitMode = false;
+
+    setStep(4);
 
     document.getElementById("challengeScreen").style.display = "block";
 
@@ -1576,6 +2082,8 @@ function showQuizCodeScreen() {
 
     revisitMode = false;
 
+    setStep(5);
+
     document.getElementById("quizCode").style.display = "block";
 
 }
@@ -1590,6 +2098,8 @@ function showRevisit() {
     hideEverything();
 
     revisitMode = true;
+
+    setStep(5);
 
     document.getElementById("revisitScreen").style.display = "block";
 
@@ -1606,6 +2116,8 @@ function showThankYou() {
 
     revisitMode = true;
 
+    setStep(5);
+
     document.getElementById("thankYouScreen").style.display = "block";
 
 }
@@ -1620,6 +2132,8 @@ function openRevisitMission(number) {
     hideEverything();
 
     revisitMode = true;
+
+    setStep(number);
 
     document.querySelectorAll(".stamp-action").forEach(function(button) {
         button.style.display = "none";
@@ -1665,7 +2179,15 @@ function backFromMission(number) {
 /* INITIAL STATE */
 /* ================================================= */
 
+wireOtpGroup("otpGroup1", unlockMission);
+wireOtpGroup("otpGroup2", unlockMission2);
+wireOtpGroup("otpGroup3", unlockMission3);
+wireOtpGroup("otpGroup4", unlockMission4);
+wireOtpGroup("otpGroupQuiz", unlockQuiz);
+
 hideEverything();
+
+setStep(1);
 
 document.getElementById("start").style.display = "block";
 
