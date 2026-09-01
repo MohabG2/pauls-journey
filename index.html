@@ -1324,12 +1324,6 @@
         خلال الرحلات الأربعة،
         وجاوب على أسئلة الورقة.
 
-        <br><br>
-
-        بعد ما تخلص الورقة، هتلاقي فيها
-        <strong>كود المسابقة</strong>،
-        ادخله هنا عشان تكمل رحلتك.
-
     </div>
 
     <div class="buttons">
@@ -1338,59 +1332,8 @@
             ← BACK
         </button>
 
-        <button class="next-button" onclick="showQuizCodeScreen()">
-            ENTER QUIZ CODE →
-        </button>
-
-    </div>
-
-</div>
-
-
-<!-- ================================================= -->
-<!-- QUIZ CODE SCREEN -->
-<!-- ================================================= -->
-
-<div id="quizCode" class="gate-screen">
-
-    <div class="step">
-        FINAL STEP
-    </div>
-
-    <h2>THE QUIZ</h2>
-
-    <div class="instruction">
-
-        اكتب <strong>كود المسابقة</strong>
-        اللي لقيته في نهاية ورقة الأسئلة.
-
-    </div>
-
-    <div class="lock">
-        🔐
-    </div>
-
-    <div class="code-title">
-        ENTER QUIZ CODE
-    </div>
-
-    <div class="otp-group" id="otpGroupQuiz">
-        <input type="text" class="otp-box" maxlength="1" inputmode="numeric">
-        <input type="text" class="otp-box" maxlength="1" inputmode="numeric">
-        <input type="text" class="otp-box" maxlength="1" inputmode="numeric">
-        <input type="text" class="otp-box" maxlength="1" inputmode="numeric">
-    </div>
-
-    <button onclick="unlockQuiz()">
-        UNLOCK
-    </button>
-
-    <div class="feedback" id="messageQuiz"></div>
-
-    <div class="buttons">
-
-        <button class="back-button" onclick="showChallenge()">
-            ← BACK
+        <button class="next-button" onclick="showThankYou()">
+            FINISH →
         </button>
 
     </div>
@@ -1640,7 +1583,6 @@ function hideEverything() {
 
     document.getElementById("finalScreen").style.display = "none";
     document.getElementById("challengeScreen").style.display = "none";
-    document.getElementById("quizCode").style.display = "none";
     document.getElementById("revisitScreen").style.display = "none";
     document.getElementById("thankYouScreen").style.display = "none";
 }
@@ -1832,48 +1774,6 @@ function unlockMission4() {
 
 
 /* ================================================= */
-/* QUIZ CODE */
-/* ================================================= */
-
-function unlockQuiz() {
-
-    const code = getOtpValue("otpGroupQuiz");
-
-    const message = document.getElementById("messageQuiz");
-
-    if (code.length < 4) return;
-
-    hideEverything();
-
-    if (code === "9999") {
-
-        revisitMode = false;
-
-        setStep(5);
-
-        message.innerHTML = "";
-        message.classList.remove("error");
-
-        document.getElementById("thankYouScreen").style.display = "block";
-
-    } else {
-
-        document.getElementById("quizCode").style.display = "block";
-
-        setStep(5);
-
-        message.innerHTML = "❌ الكود مش صح، جرّب تاني";
-        message.classList.add("error");
-
-        shakeOtpGroup("otpGroupQuiz");
-        clearOtpGroup("otpGroupQuiz");
-
-    }
-
-}
-
-
-/* ================================================= */
 /* SHOW MISSION */
 /* ================================================= */
 
@@ -1986,23 +1886,6 @@ function showChallenge() {
 
 
 /* ================================================= */
-/* QUIZ CODE SCREEN */
-/* ================================================= */
-
-function showQuizCodeScreen() {
-
-    hideEverything();
-
-    revisitMode = false;
-
-    setStep(5);
-
-    document.getElementById("quizCode").style.display = "block";
-
-}
-
-
-/* ================================================= */
 /* REVISIT JOURNEYS */
 /* ================================================= */
 
@@ -2096,7 +1979,6 @@ wireOtpGroup("otpGroup1", unlockMission);
 wireOtpGroup("otpGroup2", unlockMission2);
 wireOtpGroup("otpGroup3", unlockMission3);
 wireOtpGroup("otpGroup4", unlockMission4);
-wireOtpGroup("otpGroupQuiz", unlockQuiz);
 
 hideEverything();
 
