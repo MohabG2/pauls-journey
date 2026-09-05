@@ -1328,12 +1328,8 @@
 
     <div class="buttons">
 
-        <button class="back-button" onclick="showFinalScreen()">
-            ← BACK
-        </button>
-
-        <button class="next-button" onclick="showThankYou()">
-            FINISH →
+        <button class="next-button" onclick="showRevisit()">
+            ← REVISIT THE JOURNEYS
         </button>
 
     </div>
@@ -1377,46 +1373,12 @@
 
     <div class="buttons">
 
-        <button class="back-button" onclick="showThankYou()">
+        <button class="back-button" onclick="showChallenge()">
             ← BACK
         </button>
 
-        <button class="next-button" onclick="showThankYou()">
+        <button class="next-button" onclick="showChallenge()">
             DONE
-        </button>
-
-    </div>
-
-</div>
-
-
-<!-- ================================================= -->
-<!-- THANK YOU SCREEN -->
-<!-- ================================================= -->
-
-<div id="thankYouScreen" class="gate-screen">
-
-    <div class="step">
-        JOURNEY COMPLETE
-    </div>
-
-    <h2>THANK YOU</h2>
-
-    <h3>WE HOPE YOU ENJOYED THE JOURNEY.</h3>
-
-    <div class="final-message">
-
-        شكرًا إنك عشت الرحلة معانا.
-        <br><br>
-        نتمنى تكون استمتعت
-        بكل خطوة فيها. ❤️
-
-    </div>
-
-    <div class="buttons">
-
-        <button class="back-button" onclick="showRevisit()">
-            ← REVISIT THE JOURNEYS
         </button>
 
     </div>
@@ -1584,7 +1546,6 @@ function hideEverything() {
     document.getElementById("finalScreen").style.display = "none";
     document.getElementById("challengeScreen").style.display = "none";
     document.getElementById("revisitScreen").style.display = "none";
-    document.getElementById("thankYouScreen").style.display = "none";
 }
 
 
@@ -1878,7 +1839,7 @@ function showChallenge() {
 
     revisitMode = false;
 
-    setStep(4);
+    setStep(5);
 
     document.getElementById("challengeScreen").style.display = "block";
 
@@ -1898,23 +1859,6 @@ function showRevisit() {
     setStep(5);
 
     document.getElementById("revisitScreen").style.display = "block";
-
-}
-
-
-/* ================================================= */
-/* THANK YOU SCREEN */
-/* ================================================= */
-
-function showThankYou() {
-
-    hideEverything();
-
-    revisitMode = true;
-
-    setStep(5);
-
-    document.getElementById("thankYouScreen").style.display = "block";
 
 }
 
